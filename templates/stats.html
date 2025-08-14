@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1 class="h4 mb-3">Stats for <code>{{ item.short_code }}</code></h1>
+    <dl class="row">
+      <dt class="col-sm-3">Short URL</dt>
+      <dd class="col-sm-9"><a href="{{ request.host_url ~ item.short_code }}" target="_blank">{{ request.host_url ~ item.short_code }}</a></dd>
+      <dt class="col-sm-3">Original URL</dt>
+      <dd class="col-sm-9"><a href="{{ item.long_url }}" target="_blank">{{ item.long_url }}</a></dd>
+      <dt class="col-sm-3">Created</dt>
+      <dd class="col-sm-9">{{ item.created_at }}</dd>
+      <dt class="col-sm-3">Clicks</dt>
+      <dd class="col-sm-9">{{ item.hits }}</dd>
+      <dt class="col-sm-3">Last accessed</dt>
+      <dd class="col-sm-9">{{ item.last_accessed or "—" }}</dd>
+      <dt class="col-sm-3">Expires</dt>
+      <dd class="col-sm-9">{{ item.expires_at or "—" }} {% if item.is_expired() %}<span class="badge text-bg-danger">Expired</span>{% endif %}</dd>
+    </dl>
+  </div>
+</div>
+{% endblock %}

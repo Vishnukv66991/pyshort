@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1 class="h4 mb-3">Your shortened URL</h1>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" value="{{ short_url }}" readonly>
+      <button id="copyBtn" class="btn btn-outline-secondary" onclick="copyToClipboard('{{ short_url }}')">Copy</button>
+      <a class="btn btn-primary" href="{{ short_url }}" target="_blank">Open</a>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <dl class="row mb-0">
+          <dt class="col-sm-4">Original</dt>
+          <dd class="col-sm-8"><a href="{{ long_url }}" target="_blank">{{ long_url }}</a></dd>
+          <dt class="col-sm-4">Code</dt>
+          <dd class="col-sm-8"><code>{{ code }}</code></dd>
+          {% if expires_at %}
+          <dt class="col-sm-4">Expires</dt>
+          <dd class="col-sm-8">{{ expires_at }}</dd>
+          {% endif %}
+        </dl>
+        <a class="btn btn-link ps-0" href="{{ url_for('stats', code=code) }}">View stats</a>
+      </div>
+      <div class="col-md-3 text-center">
+        <img class="img-fluid border rounded" src="{{ url_for('static', filename='qr/' ~ code ~ '.png') }}" alt="QR for {{ code }}">
+        <div class="form-text">Scan to open</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

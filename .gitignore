@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+instance/
+.env
+url_shortener.db
+*.sqlite3
+*.sqlite
+*.log
+static/qr/*.png
